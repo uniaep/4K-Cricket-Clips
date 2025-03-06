@@ -114,18 +114,20 @@
         element.classList.add('active');
     }
 
-    window.onload = function() {
-        if (!localStorage.getItem('popupClosed')) {
-            document.getElementById('popup').style.display = 'block';
-        }
-    }
-
     function closePopup() {
         document.getElementById('popup').style.display = 'none';
         localStorage.setItem('popupClosed', 'true');
     }
-</script>
 
+    document.addEventListener("DOMContentLoaded", function() {
+        if (localStorage.getItem('popupClosed') === 'true') {
+            document.getElementById('popup').style.display = 'none';
+        } else {
+            document.getElementById('popup').style.display = 'block';
+        }
+    });
+</script>
+    
 </head>
 <body>
     <div class="popup" id="popup">
