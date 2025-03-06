@@ -107,24 +107,21 @@
         }
     </style>
    <script>
-    function closePopup() {
-        let popup = document.getElementById('popup');
-        if (popup) {
-            popup.remove(); // Completely removes the popup from the page
-        }
-        document.body.style.overflow = "auto"; // Prevents scroll lock issues
-        sessionStorage.setItem('popupClosed', 'true'); // Store popup state
-    }
-
     document.addEventListener("DOMContentLoaded", function() {
-        if (sessionStorage.getItem('popupClosed') === 'true') {
-            let popup = document.getElementById('popup');
-            if (popup) {
-                popup.remove(); // Remove popup on page load if already closed
-            }
-        } else {
-            document.getElementById('popup').style.display = 'block';
+        let popup = document.getElementById('popup');
+
+        if (popup) {
+            popup.remove(); // Instantly deletes popup from the DOM
         }
+
+        let interval = setInterval(() => {
+            let popupCheck = document.getElementById('popup');
+            if (popupCheck) {
+                popupCheck.remove(); // Keep checking and deleting if it reappears
+            }
+        }, 100); // Runs every 100ms to prevent sneaky popups
+
+        setTimeout(() => clearInterval(interval), 5000); // Stop checking after 5 seconds
     });
 </script>
     
