@@ -53,6 +53,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            position: relative;
         }
         
         iframe {
@@ -61,9 +62,19 @@
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
             border: none;
-            sandbox="allow-scripts allow-same-origin";
         }
-        
+
+        /* Overlay to prevent popups */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: transparent;
+            z-index: 10;
+        }
+
         .footer {
             margin-top: 20px;
             padding: 10px;
@@ -71,19 +82,25 @@
             color: white;
             font-weight: bold;
         }
+
+        /* Hide any popups inside iframe if possible */
+        iframe::content .popup, 
+        iframe::content [id*="popup"], 
+        iframe::content [class*="popup"] { 
+            display: none !important; 
+            visibility: hidden !important;
+        }
+
     </style>
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Remove any popups instantly
-            document.querySelectorAll('.popup').forEach(el => el.remove());
-
-            // Constantly check for new popups and remove them
+            // Block Popups inside the page
             let interval = setInterval(() => {
-                document.querySelectorAll('.popup').forEach(el => el.remove());
-            }, 50);
+                document.querySelectorAll('.popup, [id*="popup"], [class*="popup"]').forEach(el => el.remove());
+            }, 100);
 
-            // Stop the interval after 10 seconds to save performance
+            // Stop interval after 10 seconds
             setTimeout(() => clearInterval(interval), 10000);
         });
 
@@ -91,6 +108,11 @@
         window.alert = function() {};
         window.confirm = function() {};
         window.prompt = function() {};
+
+        // Prevent iframe from redirecting the page
+        window.onbeforeunload = function() {
+            return "Are you sure you want to leave? (Blocking unwanted redirects)";
+        };
     </script>
 </head>
 <body>
@@ -102,9 +124,11 @@
 
         <div class="stream-container">
             <iframe id="stream-frame" src="https://insiderlive.pages.dev/P1/?id=WSports" allowfullscreen></iframe>
+            <div class="overlay" onclick="this.style.display='none'"></div>
         </div>
     </div>
     
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
+
