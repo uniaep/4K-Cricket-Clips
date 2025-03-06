@@ -6,7 +6,8 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <link rel="icon" href="logo.ico" type="image/x-icon">
+    <!-- Updated favicon to .ico -->
+    <link rel="icon" href="file:///C:/Users/aarsh/OneDrive/Desktop/Site/logo.ico" type="image/x-icon">
 
     <style>
         body {
@@ -45,6 +46,26 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background: #007bff;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .tab.active {
+            background: #0056b3;
+        }
+        
         .stream-container {
             width: 100%;
             height: 500px;
@@ -60,7 +81,22 @@
             height: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
-            border: none;
+        }
+        
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+        
+        .box {
+            flex: 1;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            margin: 5px;
         }
         
         .footer {
@@ -70,9 +106,8 @@
             color: white;
             font-weight: bold;
         }
-
-        /* Telegram Popup */
-        .telegram-popup {
+        
+        .popup {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -82,17 +117,16 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: block;
-            z-index: 9999;
+            display: none;
         }
         
-        .telegram-popup img {
+        .popup img {
             width: 100px;
             height: 100px;
             border-radius: 10px;
         }
         
-        .telegram-popup a {
+        .popup a {
             display: block;
             margin-top: 10px;
             color: #007bff;
@@ -100,7 +134,7 @@
             text-decoration: none;
         }
         
-        .telegram-popup button {
+        .popup button {
             margin-top: 10px;
             padding: 5px 10px;
             background: red;
@@ -109,44 +143,31 @@
             cursor: pointer;
         }
     </style>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Keep your Telegram popup
-            let myPopup = document.getElementById('telegram-popup');
+        function switchStream(streamUrl, element) {
+            document.getElementById('stream-frame').src = streamUrl;
+            let tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+        }
 
-            // Remove all other popups except yours
-            let interval = setInterval(() => {
-                document.querySelectorAll('.popup').forEach(el => {
-                    if (el !== myPopup) {
-                        el.remove();
-                    }
-                });
-            }, 50);
-
-            // Stop the interval after 10 seconds to save performance
-            setTimeout(() => clearInterval(interval), 10000);
-        });
-
-        // Disable JavaScript popups (alert, confirm, prompt) from external sources
-        window.alert = function() {};
-        window.confirm = function() {};
-        window.prompt = function() {};
+        window.onload = function() {
+            document.getElementById('popup').style.display = 'block';
+        }
 
         function closePopup() {
-            document.getElementById('telegram-popup').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
         }
     </script>
 </head>
 <body>
-    <!-- Your Telegram Popup -->
-    <div class="telegram-popup" id="telegram-popup">
+    <div class="popup" id="popup">
         <img src="logo.ico" alt="Telegram Channel">
         <p>Join our Telegram Channel for exclusive cricket updates!</p>
         <a href="https://t.me/unixash18" target="_blank">Join Now</a>
         <button onclick="closePopup()">Close</button>
     </div>
-
+    
     <div class="header">4K Cricket Clips - Live Streaming</div>
     
     <div class="container">
@@ -154,7 +175,7 @@
         <p>Select a stream below to watch live cricket action.</p>
 
         <div class="stream-container">
-            <iframe id="stream-frame" src="https://insiderlive.pages.dev/P1/?id=WSports" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+            <iframe id="stream-frame" src="https://insiderlive.pages.dev/P1/?id=WSports" allowfullscreen></iframe>
         </div>
     </div>
     
