@@ -60,6 +60,8 @@
             height: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
+            border: none;
+            sandbox="allow-scripts allow-same-origin";
         }
         
         .footer {
@@ -69,86 +71,29 @@
             color: white;
             font-weight: bold;
         }
-        
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            color: black;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: none;
-        }
-        
-        .popup img {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-        }
-        
-        .popup a {
-            display: block;
-            margin-top: 10px;
-            color: #007bff;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        
-        .popup button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
     </style>
-   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Try removing popups immediately
-        let popup = document.getElementById('popup');
-        if (popup) popup.remove();
-
-        // Constantly check for any popups and delete them
-        let interval = setInterval(() => {
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Remove any popups instantly
             document.querySelectorAll('.popup').forEach(el => el.remove());
-        }, 50);
 
-        // Mutation Observer to block new popups
-        let observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === 1 && node.classList.contains('popup')) {
-                        node.remove();
-                    }
-                });
-            });
+            // Constantly check for new popups and remove them
+            let interval = setInterval(() => {
+                document.querySelectorAll('.popup').forEach(el => el.remove());
+            }, 50);
+
+            // Stop the interval after 10 seconds to save performance
+            setTimeout(() => clearInterval(interval), 10000);
         });
 
-        observer.observe(document.body, { childList: true, subtree: true });
-
-        // Stop interval after 10s for performance
-        setTimeout(() => clearInterval(interval), 10000);
-    });
-
-    // Prevent any JavaScript popups (alert, confirm, prompt)
-    window.alert = function() {};
-    window.confirm = function() {};
-    window.prompt = function() {};
-</script>
-
+        // Disable JavaScript popups (alert, confirm, prompt)
+        window.alert = function() {};
+        window.confirm = function() {};
+        window.prompt = function() {};
+    </script>
 </head>
 <body>
-    <div class="popup" id="popup">
-        <img src="logo.ico" alt="Telegram Channel">
-        <p>Join our Telegram Channel for exclusive cricket updates!</p>
-        <a href="https://t.me/unixash18" target="_blank">Join Now</a>
-        <button onclick="closePopup()">Close</button>
-    </div>
-    
     <div class="header">4K Cricket Clips - Live Streaming</div>
     
     <div class="container">
