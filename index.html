@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            text-align: center;
             background-color: #0b0b0b;
             color: white;
             margin: 0;
@@ -24,7 +25,10 @@
         .container {
             max-width: 1000px;
             margin: auto;
+            background: #1e1e1e;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
         .tabs {
             display: flex;
@@ -45,12 +49,17 @@
             color: white;
         }
         .stream-container {
+            width: 100%;
+            height: 500px;
+            background: black;
             display: flex;
+            align-items: center;
             justify-content: center;
+            border-radius: 10px;
         }
         iframe {
             width: 90%;
-            height: 500px;
+            height: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
@@ -58,6 +67,8 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+            font-size: 14px;
+            color: gray;
         }
         .box {
             flex: 1;
@@ -76,8 +87,8 @@
         }
     </style>
     <script>
-        function switchStream(streamId, element) {
-            document.getElementById('stream-frame').src = streamId;
+        function switchStream(streamUrl, element) {
+            document.getElementById('stream-frame').src = streamUrl;
             let tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
@@ -87,14 +98,19 @@
 <body>
     <div class="header">🔥 4K Cricket Clips - Live Streaming 🔥</div>
     <div class="container">
+        <h1>Watch Cricket Live in HD</h1>
+        <p>Select a stream below to watch live cricket action.</p>
+        
         <div class="tabs">
             <div class="tab active" onclick="switchStream('https://www.example.com/stream1', this)">Live Match 1</div>
             <div class="tab" onclick="switchStream('https://www.example.com/stream2', this)">Live Match 2</div>
             <div class="tab" onclick="switchStream('https://www.example.com/backup', this)">Backup</div>
         </div>
+        
         <div class="stream-container">
             <iframe id="stream-frame" src="https://www.example.com/stream1" allowfullscreen></iframe>
         </div>
+        
         <div class="info-section">
             <div class="box">
                 <h3>📊 Live Scores</h3>
@@ -106,6 +122,7 @@
             </div>
         </div>
     </div>
+    
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
