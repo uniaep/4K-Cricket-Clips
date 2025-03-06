@@ -53,7 +53,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 10px;
-            position: relative;
         }
         
         iframe {
@@ -63,18 +62,7 @@
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
             border: none;
         }
-
-        /* Overlay to prevent popups */
-        .overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: transparent;
-            z-index: 10;
-        }
-
+        
         .footer {
             margin-top: 20px;
             padding: 10px;
@@ -83,39 +71,82 @@
             font-weight: bold;
         }
 
-        /* Hide any popups inside iframe if possible */
-        iframe::content .popup, 
-        iframe::content [id*="popup"], 
-        iframe::content [class*="popup"] { 
-            display: none !important; 
-            visibility: hidden !important;
+        /* Telegram Popup */
+        .telegram-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: block;
+            z-index: 9999;
         }
-
+        
+        .telegram-popup img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+        
+        .telegram-popup a {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .telegram-popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Block Popups inside the page
-            let interval = setInterval(() => {
-                document.querySelectorAll('.popup, [id*="popup"], [class*="popup"]').forEach(el => el.remove());
-            }, 100);
+            // Keep your Telegram popup
+            let myPopup = document.getElementById('telegram-popup');
 
-            // Stop interval after 10 seconds
+            // Remove all other popups except yours
+            let interval = setInterval(() => {
+                document.querySelectorAll('.popup').forEach(el => {
+                    if (el !== myPopup) {
+                        el.remove();
+                    }
+                });
+            }, 50);
+
+            // Stop the interval after 10 seconds to save performance
             setTimeout(() => clearInterval(interval), 10000);
         });
 
-        // Disable JavaScript popups (alert, confirm, prompt)
+        // Disable JavaScript popups (alert, confirm, prompt) from external sources
         window.alert = function() {};
         window.confirm = function() {};
         window.prompt = function() {};
 
-        // Prevent iframe from redirecting the page
-        window.onbeforeunload = function() {
-            return "Are you sure you want to leave? (Blocking unwanted redirects)";
-        };
+        function closePopup() {
+            document.getElementById('telegram-popup').style.display = 'none';
+        }
     </script>
 </head>
 <body>
+    <!-- Your Telegram Popup -->
+    <div class="telegram-popup" id="telegram-popup">
+        <img src="logo.ico" alt="Telegram Channel">
+        <p>Join our Telegram Channel for exclusive cricket updates!</p>
+        <a href="https://t.me/unixash18" target="_blank">Join Now</a>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
     <div class="header">4K Cricket Clips - Live Streaming</div>
     
     <div class="container">
@@ -123,12 +154,10 @@
         <p>Select a stream below to watch live cricket action.</p>
 
         <div class="stream-container">
-            <iframe id="stream-frame" src="https://insiderlive.pages.dev/P1/?id=WSports" allowfullscreen></iframe>
-            <div class="overlay" onclick="this.style.display='none'"></div>
+            <iframe id="stream-frame" src="https://insiderlive.pages.dev/P1/?id=WSports" allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
         </div>
     </div>
     
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
-
