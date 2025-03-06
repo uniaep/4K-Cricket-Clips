@@ -106,22 +106,26 @@
             cursor: pointer;
         }
     </style>
-    <script>
-        function switchStream(streamUrl) {
-            document.getElementById('stream-frame').src = streamUrl;
-        }
+   <script>
+    function switchStream(streamUrl, element) {
+        document.getElementById('stream-frame').src = streamUrl;
+        let tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        element.classList.add('active');
+    }
 
-        window.onload = function() {
-            if (!sessionStorage.getItem('popupDisplayed')) {
-                document.getElementById('popup').style.display = 'block';
-                sessionStorage.setItem('popupDisplayed', 'true');
-            }
+    window.onload = function() {
+        if (!localStorage.getItem('popupClosed')) {
+            document.getElementById('popup').style.display = 'block';
         }
+    }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-    </script>
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        localStorage.setItem('popupClosed', 'true');
+    }
+</script>
+
 </head>
 <body>
     <div class="popup" id="popup">
