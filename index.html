@@ -5,84 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" type="image/jpg" href="file:///C:/Users/aarsh/Downloads/Telegram%20Desktop/photo_2025-03-06_15-10-17.jpg">
+    <link rel="icon" type="image/jpeg" href="photo_2025-03-06_15-10-17.jpg">
     <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        text-align: center;
-        background-color: #0b0b0b;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-    .header {
-    width: 100%;
-    background: linear-gradient(90deg, #005bea, #00c6fb); /* Blue gradient */
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 28px;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0px 4px 10px rgba(0, 102, 255, 0.5); /* Soft glow */
-    letter-spacing: 2px;
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-        
-    .container {
-        max-width: 1000px;
-        margin: auto;
-        background: #1e1e1e;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    .tabs {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    .tab {
-        padding: 10px 20px;
-        margin: 0 10px;
-        cursor: pointer;
-        background: #007bff;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-    }
-    .tab.active {
-        background: #0056b3;
-    }
-    .stream-container {
-        width: 100%;
-        height: 500px;
-        background: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-    }
-    iframe {
-        width: 90%;
-        height: 100%;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
-    }
-    .footer {
-        margin-top: 20px;
-        padding: 10px;
-        background: linear-gradient(90deg, #007bff, #0056b3);
-        color: white;
-        font-weight: bold;
-        text-align: center;
-    }
-</style>
-    
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #0b0b0b;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background: #007bff;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        .tab.active {
+            background: #0056b3;
+        }
+        .stream-container {
+            width: 100%;
+            height: 500px;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        iframe {
+            width: 90%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
+        }
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+        .box {
+            flex: 1;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        .popup img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+        .popup a {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
     <script>
         function switchStream(streamUrl, element) {
             document.getElementById('stream-frame').src = streamUrl;
@@ -100,7 +126,7 @@
 </head>
 <body>
     <div class="popup" id="popup">
-        <img src="file:///C:/Users/aarsh/Downloads/Telegram%20Desktop/photo_2025-03-06_15-10-17.jpg" alt="Telegram Channel">
+        <img src="photo_2025-03-06_15-10-17.jpg" alt="Telegram Channel">
         <p>Join our Telegram Channel for exclusive cricket updates!</p>
         <a href="https://t.me/unixash18" target="_blank">Join Now</a>
         <button onclick="closePopup()">Close</button>
