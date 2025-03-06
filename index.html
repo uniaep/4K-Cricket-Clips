@@ -111,20 +111,32 @@
         let popup = document.getElementById('popup');
 
         if (popup) {
-            popup.remove(); // Instantly deletes popup from the DOM
+            popup.remove(); // Instantly delete it
         }
 
+        // Keep deleting any popups that might reappear
         let interval = setInterval(() => {
-            let popupCheck = document.getElementById('popup');
-            if (popupCheck) {
-                popupCheck.remove(); // Keep checking and deleting if it reappears
-            }
-        }, 100); // Runs every 100ms to prevent sneaky popups
+            document.querySelectorAll('.popup').forEach(el => el.remove());
+        }, 50); // Runs every 50ms (super aggressive)
 
-        setTimeout(() => clearInterval(interval), 5000); // Stop checking after 5 seconds
+        // Block any scripts from adding it back
+        let observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.classList && node.classList.contains('popup')) {
+                        node.remove(); // Remove if found
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Stop the interval after 10 seconds to save performance
+        setTimeout(() => clearInterval(interval), 10000);
     });
 </script>
-    
+
 </head>
 <body>
     <div class="popup" id="popup">
