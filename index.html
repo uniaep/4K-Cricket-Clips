@@ -6,61 +6,64 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0b0b0b;
-            color: white;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            text-align: center;
         }
         .header {
-            background: linear-gradient(to right, #ff6600, #ffcc00);
+            background: linear-gradient(to right, #007bff, #00c6ff);
             padding: 20px;
-            text-align: center;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
+            box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5);
         }
         .container {
             max-width: 1200px;
             margin: auto;
-            background: #1e1e1e;
+            background: #1e1e2f;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
         .tabs {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 20px;
         }
         .tab {
             background: #222;
-            padding: 12px 20px;
+            padding: 15px 25px;
             cursor: pointer;
             border-radius: 10px;
             font-weight: bold;
             transition: 0.3s;
         }
         .tab:hover, .tab.active {
-            background: #ff6600;
+            background: #007bff;
             color: white;
         }
         .stream-container {
             width: 100%;
-            height: 500px;
+            height: 550px;
             background: black;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.5);
         }
         iframe {
             width: 100%;
             height: 100%;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
         .info-section {
             display: flex;
@@ -72,15 +75,16 @@
         .box {
             flex: 1;
             background: #222;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             text-align: center;
             margin: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
         }
         .footer {
             text-align: center;
-            padding: 15px;
-            background: #111;
+            padding: 20px;
+            background: #0a0a23;
             margin-top: 20px;
             font-size: 14px;
         }
@@ -99,17 +103,17 @@
     <div class="container">
         <h1>Watch Cricket Live in HD</h1>
         <p>Select a stream below to watch live cricket action.</p>
-
+        
         <div class="tabs">
             <div class="tab active" onclick="switchStream('https://www.example.com/stream1', this)">Live Match 1</div>
             <div class="tab" onclick="switchStream('https://www.example.com/stream2', this)">Live Match 2</div>
             <div class="tab" onclick="switchStream('https://www.example.com/backup', this)">Backup</div>
         </div>
-
+        
         <div class="stream-container">
             <iframe id="stream-frame" src="https://www.example.com/stream1" allowfullscreen></iframe>
         </div>
-
+        
         <div class="info-section">
             <div class="box">
                 <h3>Live Scores</h3>
@@ -121,6 +125,7 @@
             </div>
         </div>
     </div>
+    
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
