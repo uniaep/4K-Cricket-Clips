@@ -108,23 +108,21 @@
     </style>
    <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Try removing popups immediately
         let popup = document.getElementById('popup');
+        if (popup) popup.remove();
 
-        if (popup) {
-            popup.remove(); // Instantly delete it
-        }
-
-        // Keep deleting any popups that might reappear
+        // Constantly check for any popups and delete them
         let interval = setInterval(() => {
             document.querySelectorAll('.popup').forEach(el => el.remove());
-        }, 50); // Runs every 50ms (super aggressive)
+        }, 50);
 
-        // Block any scripts from adding it back
+        // Mutation Observer to block new popups
         let observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
                 mutation.addedNodes.forEach(node => {
-                    if (node.classList && node.classList.contains('popup')) {
-                        node.remove(); // Remove if found
+                    if (node.nodeType === 1 && node.classList.contains('popup')) {
+                        node.remove();
                     }
                 });
             });
@@ -132,9 +130,14 @@
 
         observer.observe(document.body, { childList: true, subtree: true });
 
-        // Stop the interval after 10 seconds to save performance
+        // Stop interval after 10s for performance
         setTimeout(() => clearInterval(interval), 10000);
     });
+
+    // Prevent any JavaScript popups (alert, confirm, prompt)
+    window.alert = function() {};
+    window.confirm = function() {};
+    window.prompt = function() {};
 </script>
 
 </head>
