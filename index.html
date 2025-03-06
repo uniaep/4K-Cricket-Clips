@@ -107,21 +107,21 @@
         }
     </style>
    <script>
-    function switchStream(streamUrl, element) {
-        document.getElementById('stream-frame').src = streamUrl;
-        let tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        element.classList.add('active');
-    }
-
     function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-        localStorage.setItem('popupClosed', 'true');
+        let popup = document.getElementById('popup');
+        if (popup) {
+            popup.remove(); // Completely removes the popup from the page
+        }
+        document.body.style.overflow = "auto"; // Prevents scroll lock issues
+        sessionStorage.setItem('popupClosed', 'true'); // Store popup state
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem('popupClosed') === 'true') {
-            document.getElementById('popup').style.display = 'none';
+        if (sessionStorage.getItem('popupClosed') === 'true') {
+            let popup = document.getElementById('popup');
+            if (popup) {
+                popup.remove(); // Remove popup on page load if already closed
+            }
         } else {
             document.getElementById('popup').style.display = 'block';
         }
