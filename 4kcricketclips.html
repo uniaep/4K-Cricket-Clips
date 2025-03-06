@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4K Cricket Clips - Live Streaming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            background: #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background: #ffcc00;
+            color: black;
+        }
+        .stream-container {
+            width: 100%;
+            height: 450px;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: gray;
+        }
+        .schedule, .live-score {
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function switchStream(streamId) {
+            document.getElementById('stream-frame').src = streamId;
+            let tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(streamId).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>4K Cricket Clips - Live Streaming</h1>
+        <p>Watch live cricket matches in HD quality!</p>
+        
+        <div class="tabs">
+            <div class="tab active" id="stream1">Stream 1</div>
+            <div class="tab" id="stream2">Stream 2</div>
+            <div class="tab" id="stream3">Backup</div>
+        </div>
+        
+        <div class="stream-container">
+            <p>Stream will be available here.</p>
+        </div>
+        
+        <div class="live-score">
+            <h2>Live Scores</h2>
+            <p>Live score widget or API integration goes here.</p>
+        </div>
+        
+        <div class="schedule">
+            <h2>Upcoming Matches</h2>
+            <ul>
+                <li>Match 1 - Date & Time</li>
+                <li>Match 2 - Date & Time</li>
+                <li>Match 3 - Date & Time</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</p>
+    </div>
+</body>
+</html>
