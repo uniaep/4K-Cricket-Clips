@@ -6,29 +6,26 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="logo.ico" type="image/x-icon">
-
     <style>
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
             color: white;
             margin: 0;
             padding: 0;
         }
-        
+
         .header, .footer {
-            width: 100%;
-            background: linear-gradient(90deg, #c31432, #240b36);
+            background: linear-gradient(90deg, #662D8C, #ED1E79);
             color: white;
             text-align: center;
             padding: 20px 0;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
+            box-shadow: 0px 4px 10px rgba(237, 30, 121, 0.5);
             letter-spacing: 2px;
-            z-index: 1000;
         }
 
         .container {
@@ -39,7 +36,6 @@
             padding-top: 80px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
         }
 
         .stream-container {
@@ -50,7 +46,6 @@
             align-items: center;
             justify-content: center;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
         }
         
         video {
@@ -66,68 +61,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.3s ease-in-out;
         }
 
         .popup {
-            background: linear-gradient(45deg, #f12711, #f5af19);
-            color: black;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: white;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
             text-align: center;
             max-width: 400px;
-            animation: fadeIn 0.5s ease-in-out;
         }
         
         .popup a {
             display: block;
             margin-top: 10px;
+            padding: 10px;
+            background: #FF416C;
             color: white;
             font-weight: bold;
             text-decoration: none;
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
-            padding: 10px;
-            border-radius: 8px;
+            border-radius: 5px;
             transition: 0.3s;
         }
-
+        
         .popup a:hover {
-            background: linear-gradient(90deg, #ff4b2b, #ff416c);
+            background: #FF4B2B;
         }
         
         .popup button {
             margin-top: 10px;
-            padding: 8px 15px;
-            background: red;
+            padding: 5px 10px;
+            background: #D72638;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
+            border-radius: 5px;
             transition: 0.3s;
         }
+        
         .popup button:hover {
-            background: darkred;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background: #A61C30;
         }
     </style>
-
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         function switchStream(streamUrl) {
