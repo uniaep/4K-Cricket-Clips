@@ -75,8 +75,6 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            opacity: 0;
-            animation: fadeIn 0.7s ease-in-out forwards;
         }
 
         .popup {
@@ -144,7 +142,6 @@
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = streamUrl;
             }
-            video.play();
         }
 
         window.onload = function() {
@@ -154,6 +151,7 @@
 
         function closePopup() {
             document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('stream-video').play();  // Start playing after closing popup
         }
     </script>
 </head>
