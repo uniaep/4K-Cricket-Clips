@@ -5,31 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <link rel="icon" href="logo.ico" type="image/x-icon">
 
     <style>
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: linear-gradient(to bottom, #7F7FD5, #86A8E7, #91EAE4);
             color: white;
             margin: 0;
             padding: 0;
         }
         
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #ff512f, #dd2476);
+        .header, .footer {
+            background: linear-gradient(to right, #c31432, #240b36);
             color: white;
             text-align: center;
             padding: 20px 0;
             font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(255, 102, 0, 0.5);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
             letter-spacing: 2px;
             z-index: 1000;
         }
@@ -37,11 +34,11 @@
         .container {
             max-width: 1000px;
             margin: auto;
-            background: rgba(30, 41, 59, 0.9);
+            background: rgba(30, 30, 30, 0.9);
             padding: 20px;
             padding-top: 80px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .stream-container {
@@ -61,15 +58,48 @@
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
         
-        .footer {
-            margin-top: 20px;
-            padding: 10px;
-            background: linear-gradient(90deg, #ff512f, #dd2476);
-            color: white;
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .popup a {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
             font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         function switchStream(streamUrl) {
