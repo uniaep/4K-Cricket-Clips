@@ -6,7 +6,7 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Updated favicon to .ico -->
+    <!-- Updated favicon -->
     <link rel="icon" href="logo.ico" type="image/x-icon">
 
     <style>
@@ -71,35 +71,74 @@
             font-weight: bold;
         }
         
+        /* Improved Popup Design */
         .popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
-            color: black;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 0.4s ease-in-out;
+            z-index: 1100;
         }
-        
+
+        .popup p {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
         .popup a {
-            display: block;
-            margin-top: 10px;
-            color: #007bff;
+            display: inline-block;
+            padding: 10px 15px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
             font-weight: bold;
             text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
         }
-        
+
+        .popup a:hover {
+            background: linear-gradient(90deg, #ff4b2b, #ff416c);
+            transform: scale(1.05);
+        }
+
         .popup button {
             margin-top: 10px;
-            padding: 5px 10px;
-            background: red;
+            padding: 8px 12px;
+            background: #ff4b2b;
             color: white;
+            font-weight: bold;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
+            transition: 0.3s;
         }
+
+        .popup button:hover {
+            background: #d63a1e;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -55%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -127,14 +166,17 @@
     </script>
 </head>
 <body>
+    <!-- Popup -->
     <div class="popup" id="popup">
         <p>Join our Telegram Channel for exclusive cricket updates!</p>
         <a href="https://t.me/unixash18" target="_blank">Join Now</a>
         <button onclick="closePopup()">Close</button>
     </div>
     
+    <!-- Header -->
     <div class="header">4K Cricket Clips - Live Streaming</div>
     
+    <!-- Main Content -->
     <div class="container">
         <h1>Watch Cricket Live in HD</h1>
         <p>Select a stream below to watch live cricket action.</p>
@@ -144,6 +186,7 @@
         </div>
     </div>
     
+    <!-- Footer -->
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
