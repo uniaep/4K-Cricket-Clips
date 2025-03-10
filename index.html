@@ -6,39 +6,42 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="logo.ico" type="image/x-icon">
-    
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #1e1e2e, #252542);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
             margin: 0;
             padding: 0;
         }
         
         .header, .footer {
+            width: 100%;
             background: linear-gradient(90deg, #c31432, #240b36);
             color: white;
             text-align: center;
             padding: 20px 0;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.5);
             letter-spacing: 2px;
+            z-index: 1000;
         }
-        
+
         .container {
             max-width: 1000px;
             margin: auto;
-            background: rgba(30, 30, 30, 0.9);
+            background: rgba(255, 255, 255, 0.05);
             padding: 20px;
             padding-top: 80px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
-        
+
         .stream-container {
             width: 100%;
             height: 500px;
@@ -47,13 +50,14 @@
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
         }
         
         video {
             width: 90%;
             height: 100%;
             border-radius: 10px;
-            box-shadow: 0px 4px 12px rgba(255, 102, 0, 0.5);
+            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
         
         .popup-overlay {
@@ -62,22 +66,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            transition: opacity 0.3s ease-in-out;
         }
-        
+
         .popup {
-            background: linear-gradient(135deg, #f12711, #f5af19);
-            color: white;
+            background: linear-gradient(45deg, #f12711, #f5af19);
+            color: black;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             text-align: center;
-            max-width: 350px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            max-width: 400px;
             animation: fadeIn 0.5s ease-in-out;
         }
         
@@ -92,7 +97,7 @@
             border-radius: 8px;
             transition: 0.3s;
         }
-        
+
         .popup a:hover {
             background: linear-gradient(90deg, #ff4b2b, #ff416c);
         }
@@ -100,20 +105,29 @@
         .popup button {
             margin-top: 10px;
             padding: 8px 15px;
-            background: black;
+            background: red;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            border-radius: 6px;
+            transition: 0.3s;
         }
-        
+        .popup button:hover {
+            background: darkred;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         function switchStream(streamUrl) {
@@ -152,6 +166,7 @@
     <div class="container">
         <h1>Watch Cricket Live in HD</h1>
         <p>Select a stream below to watch live cricket action.</p>
+
         <div class="stream-container">
             <video id="stream-video" controls autoplay></video>
         </div>
