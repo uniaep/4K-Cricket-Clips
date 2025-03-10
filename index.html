@@ -6,8 +6,8 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Updated favicon to .ico -->
-    <link rel="icon" href="file:///C:/Users/aarsh/OneDrive/Desktop/Site/logo.ico" type="image/x-icon">
+    <!-- Updated favicon -->
+    <link rel="icon" href="logo.ico" type="image/x-icon">
 
     <style>
         body {
@@ -55,9 +55,9 @@
             justify-content: center;
             border-radius: 10px;
         }
-        
-        iframe {
-            width: 90%;
+
+        video {
+            width: 100%;
             height: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
@@ -107,20 +107,31 @@
             cursor: pointer;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        function switchStream(streamUrl, element) {
-            document.getElementById('stream-frame').src = streamUrl;
-            let tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            element.classList.add('active');
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
         }
 
         window.onload = function() {
             document.getElementById('popup').style.display = 'block';
-        }
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+            var video = document.getElementById('videoPlayer');
+            var videoSrc = "https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8";
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
         }
     </script>
 </head>
@@ -139,7 +150,7 @@
         <p>Select a stream below to watch live cricket action.</p>
 
         <div class="stream-container">
-            <iframe id="stream-frame" src="https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8" allowfullscreen></iframe>
+            <video id="videoPlayer" controls autoplay></video>
         </div>
     </div>
     
