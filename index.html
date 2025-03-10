@@ -5,62 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <link rel="icon" href="logo.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+    
     <style>
-        * {
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #7F7FD5, #86A8E7, #91EAE4);
+            color: white;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: linear-gradient(to bottom, #7F7FD5, #86A8E7, #91EAE4);
-            color: white;
         }
         
         .header, .footer {
-            background: linear-gradient(to right, #c31432, #240b36);
-            color: white;
-            padding: 20px 0;
-            font-size: 26px;
-            font-weight: 600;
+            background: linear-gradient(90deg, #c31432, #240b36);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
-            transition: 0.3s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
-
+        
         .container {
             max-width: 1000px;
-            margin: 60px auto;
-            background: rgba(30, 30, 30, 0.85);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-in-out;
+            margin: auto;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            padding-top: 80px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .stream-container {
             width: 100%;
             height: 500px;
+            background: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
         }
         
         video {
-            width: 100%;
+            width: 90%;
             height: 100%;
-            border-radius: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
         
         .popup-overlay {
@@ -69,8 +59,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #f12711, #f5af19);
+            backdrop-filter: blur(15px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -78,57 +68,39 @@
         }
 
         .popup {
-            background: linear-gradient(to right, #f12711, #f5af19);
-            color: white;
+            background: white;
+            color: black;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 10px;
             text-align: center;
             max-width: 350px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         
         .popup a {
             display: inline-block;
-            margin-top: 15px;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
             color: white;
-            font-weight: 600;
+            font-weight: bold;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 5px;
             transition: 0.3s;
         }
-
         .popup a:hover {
-            background: linear-gradient(to right, #0072ff, #005bea);
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
         }
         
         .popup button {
             margin-top: 10px;
-            padding: 8px 15px;
-            background: black;
+            padding: 8px 12px;
+            background: red;
             color: white;
             border: none;
             cursor: pointer;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: 0.3s;
+            border-radius: 5px;
         }
-
-        .popup button:hover {
-            background: white;
-            color: black;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -142,6 +114,7 @@
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = streamUrl;
             }
+            video.play();
         }
 
         window.onload = function() {
@@ -151,12 +124,11 @@
 
         function closePopup() {
             document.getElementById('popup-overlay').style.display = 'none';
-            document.getElementById('stream-video').play();  // Start playing after closing popup
         }
     </script>
 </head>
 <body>
-    <div class="popup-overlay fade-in" id="popup-overlay">
+    <div class="popup-overlay" id="popup-overlay">
         <div class="popup">
             <p>Join our Telegram Channel for exclusive cricket updates!</p>
             <a href="https://t.me/unixash18" target="_blank">Join Now</a>
@@ -178,3 +150,4 @@
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
+
