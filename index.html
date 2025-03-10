@@ -7,55 +7,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             background: linear-gradient(to bottom, #7F7FD5, #86A8E7, #91EAE4);
             color: white;
-            margin: 0;
-            padding: 0;
         }
         
         .header, .footer {
             background: linear-gradient(to right, #c31432, #240b36);
             color: white;
-            text-align: center;
             padding: 20px 0;
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 26px;
+            font-weight: 600;
             text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
             letter-spacing: 2px;
-            z-index: 1000;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
         }
 
         .container {
             max-width: 1000px;
-            margin: auto;
-            background: rgba(30, 30, 30, 0.9);
-            padding: 20px;
-            padding-top: 80px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            margin: 60px auto;
+            background: rgba(30, 30, 30, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
         }
 
         .stream-container {
             width: 100%;
             height: 500px;
-            background: black;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
         
         video {
-            width: 90%;
+            width: 100%;
             height: 100%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
+            border-radius: 15px;
         }
         
         .popup-overlay {
@@ -64,33 +69,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            opacity: 0;
+            animation: fadeIn 0.7s ease-in-out forwards;
         }
 
         .popup {
             background: linear-gradient(to right, #f12711, #f5af19);
             color: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
             max-width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         
         .popup a {
-            display: block;
-            margin-top: 10px;
+            display: inline-block;
+            margin-top: 15px;
             background: linear-gradient(to right, #00c6ff, #0072ff);
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             text-decoration: none;
-            padding: 8px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
@@ -99,14 +106,14 @@
         }
         
         .popup button {
-            margin-top: 8px;
-            padding: 5px 10px;
+            margin-top: 10px;
+            padding: 8px 15px;
             background: black;
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
@@ -114,6 +121,16 @@
             background: white;
             color: black;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -141,7 +158,7 @@
     </script>
 </head>
 <body>
-    <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-overlay fade-in" id="popup-overlay">
         <div class="popup">
             <p>Join our Telegram Channel for exclusive cricket updates!</p>
             <a href="https://t.me/unixash18" target="_blank">Join Now</a>
