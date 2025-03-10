@@ -12,7 +12,7 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #0b0b0b;
+            background: linear-gradient(135deg, #ff4e00, #ec9f05);
             color: white;
             margin: 0;
             padding: 0;
@@ -23,14 +23,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(90deg, #005bea, #00c6fb);
+            background: linear-gradient(90deg, #d90000, #ff6600);
             color: white;
             text-align: center;
             padding: 20px 0;
             font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(0, 102, 255, 0.5);
+            box-shadow: 0px 4px 10px rgba(255, 102, 0, 0.7);
             letter-spacing: 2px;
             z-index: 1000;
         }
@@ -38,11 +38,11 @@
         .container {
             max-width: 1000px;
             margin: auto;
-            background: #1e1e1e;
+            background: rgba(30, 30, 30, 0.9);
             padding: 20px;
             padding-top: 80px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .stream-container {
@@ -59,13 +59,13 @@
             width: 90%;
             height: 100%;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
+            box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.7);
         }
         
         .footer {
             margin-top: 20px;
             padding: 10px;
-            background: linear-gradient(90deg, #005bea, #00c6fb);
+            background: linear-gradient(90deg, #d90000, #ff6600);
             color: white;
             font-weight: bold;
         }
@@ -82,6 +82,9 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s;
         }
 
         .popup {
@@ -89,26 +92,39 @@
             color: black;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             text-align: center;
             max-width: 400px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease-in-out;
         }
         
         .popup a {
             display: block;
             margin-top: 10px;
-            color: #007bff;
+            color: #ff4500;
             font-weight: bold;
             text-decoration: none;
         }
         
         .popup button {
             margin-top: 10px;
-            padding: 5px 10px;
+            padding: 8px 15px;
             background: red;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-overlay.show .popup {
+            transform: scale(1);
         }
     </style>
 
@@ -127,12 +143,12 @@
         }
 
         window.onload = function() {
-            document.getElementById('popup-overlay').style.display = 'flex';
+            document.getElementById('popup-overlay').classList.add('show');
             switchStream("https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8");
         }
 
         function closePopup() {
-            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('popup-overlay').classList.remove('show');
         }
     </script>
 </head>
