@@ -6,6 +6,8 @@
     <title>4K Cricket Clips - Live Streaming</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="logo.ico" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -14,6 +16,9 @@
             color: white;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header, .footer {
@@ -26,20 +31,20 @@
             text-transform: uppercase;
             box-shadow: 0px 4px 10px rgba(237, 30, 121, 0.5);
             letter-spacing: 2px;
+            width: 100%;
         }
 
         .container {
-            max-width: 1000px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 20px auto;
             padding-top: 80px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .stream-container {
-            width: 100%;
+            width: 70%;
             height: 500px;
             background: black;
             display: flex;
@@ -47,67 +52,49 @@
             justify-content: center;
             border-radius: 10px;
         }
-        
+
         video {
             width: 90%;
             height: 100%;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(255, 102, 0, 0.5);
         }
-        
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
+
+        .chat-container {
+            width: 25%;
+            max-height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-left: 20px;
         }
 
-        .popup {
-            background: linear-gradient(135deg, #141E30, #243B55);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            text-align: center;
-            max-width: 400px;
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            text-align: left;
         }
-        
-        .popup a {
-            display: block;
+
+        .chat-input {
+            display: flex;
             margin-top: 10px;
-            padding: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .chat-input button {
+            padding: 8px 12px;
             background: #FF416C;
             color: white;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        
-        .popup a:hover {
-            background: #FF4B2B;
-        }
-        
-        .popup button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background: #D72638;
-            color: white;
             border: none;
-            cursor: pointer;
             border-radius: 5px;
-            transition: 0.3s;
-        }
-        
-        .popup button:hover {
-            background: #A61C30;
+            cursor: pointer;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -132,6 +119,39 @@
         function closePopup() {
             document.getElementById('popup-overlay').style.display = 'none';
         }
+
+        // Firebase Chat Setup
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        function sendMessage() {
+            const message = document.getElementById('chat-input').value;
+            if (message.trim() !== "") {
+                db.ref("messages").push().set({
+                    user: "Guest",
+                    message: message
+                });
+                document.getElementById('chat-input').value = "";
+            }
+        }
+
+        db.ref("messages").on("child_added", (snapshot) => {
+            const msg = snapshot.val();
+            const chatMessages = document.getElementById('chat-messages');
+            const messageElement = document.createElement('p');
+            messageElement.innerHTML = `<strong>${msg.user}:</strong> ${msg.message}`;
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
     </script>
 </head>
 <body>
@@ -146,11 +166,16 @@
     <div class="header">4K Cricket Clips - Live Streaming</div>
     
     <div class="container">
-        <h1>Watch Cricket Live in HD</h1>
-        <p>Select a stream below to watch live cricket action.</p>
-
         <div class="stream-container">
             <video id="stream-video" controls autoplay></video>
+        </div>
+        <div class="chat-container">
+            <h3>Live Chat</h3>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
         </div>
     </div>
     
