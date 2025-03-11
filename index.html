@@ -40,15 +40,19 @@
         }
         .stream-container {
             flex: 2;
-            height: 500px;
+            height: 600px;
             background: black;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+        .stream-container video {
+            width: 100%;
+            height: 100%;
+        }
         .chat-container {
             flex: 1;
-            height: 500px;
+            height: 600px;
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             display: flex;
@@ -58,11 +62,13 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            max-height: 450px;
+            text-align: left;
+            padding: 5px;
         }
         .chat-input {
-            width: 80%;
+            width: calc(100% - 10px);
             padding: 8px;
+            margin-bottom: 5px;
         }
         .send-button {
             padding: 8px;
@@ -72,41 +78,36 @@
             cursor: pointer;
         }
         .popup-overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white;
+            z-index: 1000;
         }
         .popup {
-            background: white;
-            color: black;
+            background: #333;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-        }
-        .popup a {
-            display: block;
-            margin-top: 10px;
-            color: #ED1E79;
-            font-weight: bold;
         }
     </style>
     
     <script>
         // Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyC3BWi2hMwlTj78BsVjTaGN0jhK6cUsEhs",
-            authDomain: "cricket-clips-live-stream.firebaseapp.com",
-            databaseURL: "https://cricket-clips-live-stream-default-rtdb.firebaseio.com/",
-            projectId: "cricket-clips-live-stream",
-            storageBucket: "cricket-clips-live-stream.appspot.com",
-            messagingSenderId: "653855798241",
-            appId: "1:653855798241:web:5759c8ea6d7985ab1718a0"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
         
         // Initialize Firebase
@@ -118,7 +119,7 @@
             var message = chatInput.value.trim();
             if (message) {
                 db.ref("messages").push({
-                    user: "Guest",
+                    user: "You",
                     text: message,
                     timestamp: Date.now()
                 });
@@ -141,15 +142,20 @@
                 var hls = new Hls();
                 hls.loadSource(streamUrl);
                 hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = streamUrl;
+                video.play();
             }
-            video.play();
         }
 
         window.addEventListener("load", function () {
-            document.getElementById('popup-overlay').style.display = 'flex';
-            switchStream("https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8");
+            setTimeout(() => {
+                document.getElementById('popup-overlay').style.display = 'flex';
+                switchStream("https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8");
+            }, 1000);
         });
         
         function closePopup() {
