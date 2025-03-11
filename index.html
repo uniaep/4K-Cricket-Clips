@@ -58,9 +58,10 @@
         .chat-messages {
             flex: 1;
             overflow-y: auto;
+            max-height: 450px;
         }
         .chat-input {
-            width: 100%;
+            width: 80%;
             padding: 8px;
         }
         .send-button {
@@ -68,6 +69,31 @@
             background: #28A745;
             color: white;
             border: none;
+            cursor: pointer;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .popup a {
+            display: block;
+            margin-top: 10px;
+            color: #ED1E79;
+            font-weight: bold;
         }
     </style>
     
@@ -76,12 +102,11 @@
         const firebaseConfig = {
             apiKey: "AIzaSyC3BWi2hMwlTj78BsVjTaGN0jhK6cUsEhs",
             authDomain: "cricket-clips-live-stream.firebaseapp.com",
-            databaseURL: "https://cricket-clips-live-stream-default-rtdb.firebaseio.com",
+            databaseURL: "https://cricket-clips-live-stream-default-rtdb.firebaseio.com/",
             projectId: "cricket-clips-live-stream",
             storageBucket: "cricket-clips-live-stream.appspot.com",
             messagingSenderId: "653855798241",
-            appId: "1:653855798241:web:5759c8ea6d7985ab1718a0",
-            measurementId: "G-GK4BJL4ZWL"
+            appId: "1:653855798241:web:5759c8ea6d7985ab1718a0"
         };
         
         // Initialize Firebase
@@ -93,7 +118,7 @@
             var message = chatInput.value.trim();
             if (message) {
                 db.ref("messages").push({
-                    user: "You",
+                    user: "Guest",
                     text: message,
                     timestamp: Date.now()
                 });
@@ -123,10 +148,8 @@
         }
 
         window.addEventListener("load", function () {
-            setTimeout(() => {
-                document.getElementById('popup-overlay').style.display = 'flex';
-                switchStream("https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8");
-            }, 1000);
+            document.getElementById('popup-overlay').style.display = 'flex';
+            switchStream("https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8");
         });
         
         function closePopup() {
@@ -162,4 +185,3 @@
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
 </body>
 </html>
-
