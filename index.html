@@ -248,44 +248,7 @@
     </div>
 
     <div class="footer">&copy; 2025 4K Cricket Clips - Best Live Cricket Streams</div>
-    <script>
-    async function fetchLiveScores() {
-        const apiKey = "0eb84fdc-3f82-4143-b640-c49206521fd2"; // Your API Key
-        const url = `https://api.cricapi.com/v1/currentMatches?apikey=${apiKey}&offset=0`;
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.status === "success") {
-                const matches = data.data;
-                const matchesContainer = document.getElementById("matches");
-                matchesContainer.innerHTML = ""; // Clear previous data
-
-                matches.forEach(match => {
-                    const matchDiv = document.createElement("div");
-                    matchDiv.style.padding = "10px";
-                    matchDiv.style.borderBottom = "1px solid white";
-                    matchDiv.innerHTML = `
-                        <strong>${match.name}</strong> <br>
-                        <span>${match.teams.join(" vs ")}</span> <br>
-                        <span>${match.status}</span> <br>
-                        ${match.score ? match.score.map(s => `<p>${s.inning}: ${s.r}/${s.w} in ${s.o} overs</p>`).join("") : "No score available"}
-                    `;
-                    matchesContainer.appendChild(matchDiv);
-                });
-            } else {
-                document.getElementById("matches").innerHTML = "<p>Failed to fetch scores.</p>";
-            }
-        } catch (error) {
-            document.getElementById("matches").innerHTML = "<p>Error fetching data.</p>";
-            console.error("Error:", error);
-        }
-    }
-
-    fetchLiveScores();
-    setInterval(fetchLiveScores, 30000); // Refresh every 30 seconds
-</script>
+    
     
 </body>
 </html>
